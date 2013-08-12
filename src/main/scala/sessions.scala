@@ -10,15 +10,18 @@ object Sessions {
     _startTtls: Option[Boolean] = None,
     _host: Option[String] = None,
     _port: Option[Int] = None,
+    _debug: Option[Boolean] = None,
     _creds: Option[(String, String)] = None) {
     def auth(a: Boolean) = copy(_auth= Some(a))
     def startTtls(s: Boolean) = copy(_startTtls = Some(s))
     def host(h: String) = copy(_host = Some(h))
     def port(p: Int) = copy(_port = Some(p))
+    def debug(d: Boolean) = copy(_debug = Some(d))
     def credentials(user: String, pass: String) =
       copy(_creds = Some((user, pass)))
     def apply() =
       mailer.copy(_session = Session.getInstance(new Properties {
+        _debug.map(d => put("mail.smtp.debug", d.toString))
         _auth.map(a => put("mail.smtp.auth", a.toString))
         _startTtls.map(s => put("mail.smtp.starttls.enable", s.toString))
         _host.map(put("mail.smtp.host", _))
