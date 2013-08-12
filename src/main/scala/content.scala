@@ -1,7 +1,7 @@
 package courier
 
 import javax.mail.{ Multipart, Transport }
-import javax.mail.internet.{ AddressException, InternetAddress, MimeBodyPart, MimeMultipart }
+import javax.mail.internet.{ MimeBodyPart, MimeMultipart }
 
 sealed trait Content
 
