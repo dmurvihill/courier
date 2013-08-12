@@ -10,12 +10,10 @@ send electronic mail via gmail
 
 ```scala
 import courier._, Defaults._
-val mailer = Mailer().session
-                     .host("smtp.gmail.com")
-                     .port(465)
-                     .auth(true)
-                     .credentials("you@gmail.com", "p@$$w3rd")
-                     .startTtls(true)()
+val mailer = Mailer("smtp.gmail.com", 587)
+               .auth(true)
+               .as("you@gmail.com", "p@$$w3rd")
+               .startTtls(true)()
                      
 mailer(Envelope("you" `@` "gmail.com")
         .to("mom" `@` "gmail.com")
