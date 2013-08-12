@@ -4,12 +4,14 @@ import javax.mail.internet.InternetAddress
 
 case class Envelope(
   from: InternetAddress,
+  _subject: Option[String] = None,
   _to: Seq[InternetAddress] = Seq.empty[InternetAddress],
   _cc: Seq[InternetAddress] = Seq.empty[InternetAddress],
   _bcc: Seq[InternetAddress] = Seq.empty[InternetAddress],
   _replyTo: Option[InternetAddress] = None,
   _headers: Seq[(String, String)] = Seq.empty[(String, String)],
   _content: Option[Content] = None) {
+  def subject(s: String) = copy(_subject = Some(s))
   def to(addrs: InternetAddress*) = copy(_to = _to ++ addrs)
   def cc(addrs: InternetAddress*) = copy(_cc = _cc ++ addrs)
   def bcc(addrs: InternetAddress*) = copy(_bcc = _bcc ++ addrs)
@@ -18,5 +20,6 @@ case class Envelope(
   def content(c: Content) = copy(_content = Some(c))
 
   def contents = _content
+  def subject = _subject
   def recipients = _to
 }
