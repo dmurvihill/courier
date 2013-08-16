@@ -2,7 +2,7 @@
   "organization" : "me.lessis",
   "name" : "courier",
   "version" : "0.1.0",
-  "description" : "courier",
+  "description" : "deliver electronic mail with scala",
   "site" : "https://github.com/softprops/courier/#readme",
   "tags" : [ "email", "mail" ],
   "docs" : "",

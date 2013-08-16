@@ -4,6 +4,8 @@ name := "courier"
 
 version := "0.1.0"
 
+description := "deliver electronic mail with scala"
+
 libraryDependencies ++= Seq(
   "javax.mail"        % "mail"        % "1.4.7",
   "javax.activation"  % "activation"  % "1.1.1"

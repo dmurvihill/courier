@@ -4,6 +4,26 @@ deliver electronic mail with scala from the [future](http://www.scala-lang.org/a
 
 ![courier](http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Courrier.jpg/337px-Courrier.jpg)
 
+## install
+
+Via the copy and paste method
+
+```scala
+resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven"
+
+libraryDependencies += "me.lessis" %% "courier" % "0.1.0"
+```
+
+Via [a more civilized method](https://github.com/softprops/ls#readme) which will do the same without all the manual work.
+
+    > ls-install courier
+    
+    Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
+    
+    ```scala
+    resolvers += bintray.Opts.resolver.repo("softprops", "maven")
+    ```
+
 ## usage
 
 deliver electronic mail via gmail
