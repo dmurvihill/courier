@@ -4,7 +4,6 @@ import javax.mail.{ Message, Session => MailSession, Transport }
 import javax.mail.internet.MimeMessage
 import scala.concurrent.{ ExecutionContext, future }
 
-
 object Mailer {
   def apply(host: String, port: Int): Session.Builder =
     Mailer().session.host(host).port(port)
@@ -21,7 +20,7 @@ case class Mailer(
       e.recipients.foreach(addRecipient(Message.RecipientType.TO, _))
       e.contents.map {
         case Text(txt, charset) => setText(txt, charset.displayName)
-        case mp @ Multiparts(_) => setContent(mp.parts)
+        case mp @ Multipart(_) => setContent(mp.parts)
       }
     }
     future {
