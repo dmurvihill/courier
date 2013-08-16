@@ -2,6 +2,11 @@ package courier
 
 import javax.mail.internet.InternetAddress
 
+object Envelope {
+  def from(addr: InternetAddress) =
+    Envelope(addr)
+}
+
 case class Envelope(
   from: InternetAddress,
   _subject: Option[String] = None,

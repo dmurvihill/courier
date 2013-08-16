@@ -15,14 +15,14 @@ val mailer = Mailer("smtp.gmail.com", 587)
                .as("you@gmail.com", "p@$$w3rd")
                .startTtls(true)()
                      
-mailer(Envelope("you" `@` "gmail.com")
+mailer(Envelope.from("you" `@` "gmail.com")
         .to("mom" `@` "gmail.com")
         .subject("miss you")
         .content(Text("hi mom"))).onSuccess {
           case _ => println("message delivered")
         }
 
-mailer(Envelop.from("you" `@` "work.com")
+mailer(Envelope.from("you" `@` "work.com")
          .to("boss" `@` "work.com")
          .subject("tps report")
          .content(Multipart()
