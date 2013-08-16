@@ -18,7 +18,7 @@ Via [a more civilized method](https://github.com/softprops/ls#readme) which will
 
     > ls-install courier
     
-    Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
+Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
     
     ```scala
     resolvers += bintray.Opts.resolver.repo("softprops", "maven")
