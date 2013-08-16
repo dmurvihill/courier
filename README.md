@@ -20,9 +20,9 @@ Via [a more civilized method](https://github.com/softprops/ls#readme) which will
     
 Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
     
-    ```scala
-    resolvers += bintray.Opts.resolver.repo("softprops", "maven")
-    ```
+```scala
+resolvers += bintray.Opts.resolver.repo("softprops", "maven")
+```
 
 ## usage
 
