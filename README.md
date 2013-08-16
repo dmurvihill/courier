@@ -1,6 +1,6 @@
 # courier
 
-deliver electronic mail with scala
+deliver electronic mail with scala from the [future](http://www.scala-lang.org/api/current/index.html#scala.concurrent.Future)
 
 ![courier](http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Courrier.jpg/337px-Courrier.jpg)
 
