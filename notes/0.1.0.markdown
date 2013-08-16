@@ -1,0 +1,20 @@
+## initial release
+
+Courier is meant to simplify the ease in which you can use to tools built into the jdk to send electronic mail in scala using [Futures](http://www.scala-lang.org/api/current/index.html#scala.concurrent.Future).
+
+To send a message to your mom
+
+    import courier._, Defaults._
+    val mailer = Mailer("smtp.gmail.com", 587)
+                 .auth(true)
+                 .as("you@gmail.com", "p@$$w3rd")
+                 .startTtls(true)()
+                                             
+    mailer(Envelope.from("you" `@` "gmail.com")
+     .to("mom" `@` "gmail.com")
+     .subject("miss you")
+     .content(Text("hi mom"))).onSuccess {
+       case _ => println("message delivered")
+     }
+
+For more information see the project's [readme](https://github.com/softprops/courier#readme)
