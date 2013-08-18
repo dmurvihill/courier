@@ -46,7 +46,7 @@ mailer(Envelope.from("you" `@` "work.com")
          .to("boss" `@` "work.com")
          .subject("tps report")
          .content(Multipart()
-           .attach("tps.xls")
+           .attach(new java.io.File("tps.xls"))
            .html("<html><body><h1>IT'S IMPORTANT</h1></body></html>")))
            .onSuccess {
              case _ => println("delivered report")
