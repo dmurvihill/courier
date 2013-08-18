@@ -37,6 +37,7 @@ val mailer = Mailer("smtp.gmail.com", 587)
                      
 mailer(Envelope.from("you" `@` "gmail.com")
         .to("mom" `@` "gmail.com")
+        .cc("dad" `@` "gmail.com")
         .subject("miss you")
         .content(Text("hi mom"))).onSuccess {
           case _ => println("message delivered")
