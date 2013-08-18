@@ -16,7 +16,7 @@ case class Envelope(
   _replyTo: Option[InternetAddress] = None,
   _replyToAll: Option[Boolean] = None,
   _headers: Seq[(String, String)] = Seq.empty[(String, String)],
-  _content: Option[Content] = None) {
+  _content: Content = Text("")) {
 
   def subject(s: String) = copy(_subject = Some(s))
   def to(addrs: InternetAddress*) = copy(_to = _to ++ addrs)
@@ -25,9 +25,13 @@ case class Envelope(
   def replyTo(addr: InternetAddress) = copy(_replyTo = Some(addr))
   def replyAll = copy(_replyToAll = Some(true))
   def headers(hdrs: (String, String)*) = copy(_headers = _headers ++ hdrs)
-  def content(c: Content) = copy(_content = Some(c))
+  def content(c: Content) = copy(_content = c)
 
   def contents = _content
   def subject = _subject
+  @deprecated("use `to` instead", "0.1.1")
   def recipients = _to
+  def to = _to
+  def cc = _cc
+  def bcc = _bcc
 }

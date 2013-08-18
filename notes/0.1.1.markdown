@@ -1,0 +1,4 @@
+## fixes
+
+* Actually set the `cc` and `bcc` ( cause everyone's gotta know )
+* Not setting a default envelope body was a body choice.  A default body is now provided with all envelopes.
