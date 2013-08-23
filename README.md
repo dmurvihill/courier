@@ -11,7 +11,7 @@ Via the copy and paste method
 ```scala
 resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven"
 
-libraryDependencies += "me.lessis" %% "courier" % "0.1.1"
+libraryDependencies += "me.lessis" %% "courier" % "0.1.2"
 ```
 
 Via [a more civilized method](https://github.com/softprops/ls#readme) which will do the same without all the manual work.
