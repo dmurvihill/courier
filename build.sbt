@@ -17,7 +17,7 @@ licenses := Seq(
 
 homepage := Some(url("https://github.com/softprops/%s/#readme".format(name.value)))
 
-scalaVersion := "2.9.3"
+scalaVersion := "2.10.2"
 
 crossScalaVersions := Seq("2.9.3", "2.10.2")
 
