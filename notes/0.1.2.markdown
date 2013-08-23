@@ -1,0 +1,15 @@
+## additions
+
+* Includes a patch from [@rowlandwatkins](https://github.com/rowlandwatkins) for adding a attachments as bytes.
+
+    mailer(Envelope.from("you" `@` "work.com")
+            .to("boss" `@` "work.com")
+            .subject("tps report")
+            .content(Multipart()
+              .attachBytes("ASCII TPS Template".getBytes(), "ascii-tps-template.txt", "text/plain")
+              .html("<html><body><h1>IT'S IMPORTANT</h1></body></html>")))
+              .onSuccess {
+                case _ => println("delivered report")
+              }
+
+Published for scala 2.9.3 _and_ 2.10
