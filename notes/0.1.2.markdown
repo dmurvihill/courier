@@ -1,6 +1,8 @@
 ## additions
 
-* Includes a patch from [@rowlandwatkins](https://github.com/rowlandwatkins) for adding a attachments as bytes.
+* Includes a patch from [@rowlandwatkins](https://github.com/rowlandwatkins) for adding an interface for attachments as bytes.
+
+Below is an example
 
     mailer(Envelope.from("you" `@` "work.com")
             .to("boss" `@` "work.com")
