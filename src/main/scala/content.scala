@@ -4,6 +4,7 @@ import javax.activation.{ DataHandler, FileDataSource }
 import javax.mail.internet.{ MimeBodyPart, MimeMultipart }
 import java.io.File
 import java.nio.charset.Charset
+import javax.mail.util.ByteArrayDataSource
 
 sealed trait Content
 
@@ -42,6 +43,12 @@ case class Multipart(
     add(new MimeBodyPart {
       setDataHandler(new DataHandler(new FileDataSource(file)))
       setFileName(name.getOrElse(file.getName))
+    })
+
+  def attachBytes(bytes: Array[Byte], name: String, mimeType: String) =
+    add(new MimeBodyPart {
+      setDataHandler(new DataHandler(new ByteArrayDataSource(bytes, mimeType)))
+      setFileName(name)
     })
 
   def parts =
