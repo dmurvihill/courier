@@ -56,7 +56,7 @@ mailer(Envelope.from("you" `@` "work.com")
 
 ## testing
 
-Since courier is based on JavaMail, you can use [Mock JavaMail](https://mock-javamail.dev.java.net/) to execute your tests. Simply add the following to your `build.sbt`:
+Since courier is based on JavaMail, you can use [Mock JavaMail](https://java.net/projects/mock-javamail) to execute your tests. Simply add the following to your `build.sbt`:
 
 ```scala
 libraryDependencies += "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % "test"
