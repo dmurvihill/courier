@@ -2,7 +2,7 @@ package courier
 
 import javax.mail.{ Message, Session => MailSession, Transport }
 import javax.mail.internet.MimeMessage
-import scala.concurrent.{ ExecutionContext, future }
+import scala.concurrent.{ ExecutionContext, Future }
 
 object Mailer {
   def apply(host: String, port: Int): Session.Builder =
@@ -13,7 +13,7 @@ case class Mailer(
   _session: MailSession = Defaults.session) {
   def session = Session.Builder(this)
 
-  def apply(e: Envelope)(implicit ec: ExecutionContext) = {
+  def apply(e: Envelope)(implicit ec: ExecutionContext): Future[Unit] = {
     val msg = new MimeMessage(_session) {
       e.subject.map(setSubject(_))
       setFrom(e.from)
@@ -26,7 +26,7 @@ case class Mailer(
         case mp @ Multipart(_) => setContent(mp.parts)
       }
     }
-    future {
+    Future {
       Transport.send(msg)
     }
   }
