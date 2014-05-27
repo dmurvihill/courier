@@ -1,0 +1,7 @@
+# fixes
+
+* [#8](https://github.com/softprops/courier/pull/8) SMTP headers were not being send [mariusmuja][https://github.com/mariusmuja]
+
+# enhancements
+
+* [#7](https://github.com/softprops/courier/pull/7) added documentation on testing [mcamou](https://github.com/mcamou)

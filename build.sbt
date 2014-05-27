@@ -2,7 +2,7 @@ organization := "me.lessis"
 
 name := "courier"
 
-version := "0.1.2"
+version := "0.1.3"
 
 description := "deliver electronic mail with scala"
 
@@ -17,9 +17,9 @@ licenses := Seq(
 
 homepage := Some(url("https://github.com/softprops/%s/#readme".format(name.value)))
 
-scalaVersion := "2.10.2"
+crossScalaVersions := Seq("2.9.3", "2.10.4", "2.11.0")
 
-crossScalaVersions := Seq("2.9.3", "2.10.2")
+scalaVersion := crossScalaVersions.value.last
 
 seq(bintraySettings:_*)
 
@@ -30,3 +30,16 @@ seq(lsSettings:_*)
 (LsKeys.tags in LsKeys.lsync) := Seq("email", "mail")
 
 (externalResolvers in LsKeys.lsync) := (resolvers in bintray.Keys.bintray).value
+
+pomExtra := (
+  <scm>
+    <url>git@github.com:softprops/courier.git</url>
+    <connection>scm:git:git@github.com:softprops/courier.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>softprops</id>
+      <name>Doug Tangren</name>
+      <url>https://github.com/softprops</url>
+    </developer>
+  </developers>)
