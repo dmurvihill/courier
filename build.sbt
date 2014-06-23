@@ -12,10 +12,9 @@ libraryDependencies ++= Seq(
 )
 
 licenses := Seq(
-  ("MIT", url("https://github.com/softprops/%s/blob/%s/LICENSE"
-              .format(name.value,version.value))))
+  ("MIT", url(s"https://github.com/softprops/${name.value}/blob/${version.value}/LICENSE")))
 
-homepage := Some(url("https://github.com/softprops/%s/#readme".format(name.value)))
+homepage := Some(url(s"https://github.com/softprops/${name.value}/#readme"))
 
 crossScalaVersions := Seq("2.9.3", "2.10.4", "2.11.0")
 
