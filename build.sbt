@@ -16,19 +16,19 @@ licenses := Seq(
 
 homepage := Some(url(s"https://github.com/softprops/${name.value}/#readme"))
 
-crossScalaVersions := Seq("2.9.3", "2.10.4", "2.11.0")
+crossScalaVersions := Seq("2.10.4", "2.11.1")
 
 scalaVersion := crossScalaVersions.value.last
 
 seq(bintraySettings:_*)
 
-bintray.Keys.packageLabels in bintray.Keys.bintray := Seq("email", "mail")
+bintray.Keys.packageLabels in bintray.Keys.bintray := Seq("email", "mail", "javamail")
 
 seq(lsSettings:_*)
 
-(LsKeys.tags in LsKeys.lsync) := Seq("email", "mail")
+LsKeys.tags in LsKeys.lsync := (bintray.Keys.packageLabels in bintray.Keys.bintray).value
 
-(externalResolvers in LsKeys.lsync) := (resolvers in bintray.Keys.bintray).value
+externalResolvers in LsKeys.lsync := (resolvers in bintray.Keys.bintray).value
 
 pomExtra := (
   <scm>
