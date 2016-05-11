@@ -33,7 +33,7 @@ import courier._, Defaults._
 val mailer = Mailer("smtp.gmail.com", 587)
                .auth(true)
                .as("you@gmail.com", "p@$$w3rd")
-               .startTtls(true)()
+               .startTls(true)()
                      
 mailer(Envelope.from("you" `@` "gmail.com")
         .to("mom" `@` "gmail.com")
@@ -53,6 +53,8 @@ mailer(Envelope.from("you" `@` "work.com")
              case _ => println("delivered report")
            }
 ```
+
+If using SSL/TLS instead of STARTTLS, substitute `.startTls(true)` with `.ssl(true)` when setting up the `Mailer`.
 
 ## testing
 
