@@ -11,15 +11,15 @@ Via the copy and paste method
 ```scala
 resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven"
 
-libraryDependencies += "me.lessis" %% "courier" % "0.1.3"
+libraryDependencies += "me.lessis" %% "courier" % "0.1.4"
 ```
 
 Via [a more civilized method](https://github.com/softprops/ls#readme) which will do the same without all the manual work.
 
     > ls-install courier
-    
+
 Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
-    
+
 ```scala
 resolvers += bintray.Opts.resolver.repo("softprops", "maven")
 ```
@@ -34,7 +34,7 @@ val mailer = Mailer("smtp.gmail.com", 587)
                .auth(true)
                .as("you@gmail.com", "p@$$w3rd")
                .startTtls(true)()
-                     
+
 mailer(Envelope.from("you" `@` "gmail.com")
         .to("mom" `@` "gmail.com")
         .cc("dad" `@` "gmail.com")
@@ -79,7 +79,7 @@ class MailSpec extends Specification with NoTimeConversions {
           	.cc("dad@gmail.com")
           	.subject("miss you")
           	.content(Text("hi mom")))
-          	
+
           Await.ready(future, 5.seconds)
           val momsInbox = Mailbox.get("mom@gmail.com")
           momsInbox.size === 1
