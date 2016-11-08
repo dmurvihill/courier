@@ -2,7 +2,7 @@ organization := "me.lessis"
 
 name := "courier"
 
-version := "0.1.3"
+version := "0.1.4"
 
 description := "deliver electronic mail with scala"
 
@@ -16,7 +16,7 @@ licenses := Seq(
 
 homepage := Some(url(s"https://github.com/softprops/${name.value}/#readme"))
 
-crossScalaVersions := Seq("2.10.4", "2.11.1")
+crossScalaVersions := Seq("2.10.4", "2.11.8", "2.12.0")
 
 scalaVersion := crossScalaVersions.value.last
 
