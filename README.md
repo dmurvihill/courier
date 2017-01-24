@@ -14,10 +14,6 @@ resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven
 libraryDependencies += "me.lessis" %% "courier" % "0.1.3"
 ```
 
-Via [a more civilized method](https://github.com/softprops/ls#readme) which will do the same without all the manual work.
-
-    > ls-install courier
-    
 Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
     
 ```scala
@@ -86,7 +82,9 @@ class MailSpec extends Specification with NoTimeConversions {
           val momsMsg = momsInbox.get(0)
           momsMsg.getContent === "hi mom"
           momsMsg.getSubject === "miss you"
-        }       	  	}  }
+        }       	
+  	}
+  }
 }        
 ```
 
