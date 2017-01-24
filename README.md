@@ -9,19 +9,15 @@ deliver electronic mail with scala from the [future](http://www.scala-lang.org/a
 Via the copy and paste method
 
 ```scala
-resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven"
+resolvers += "lightshed-maven" at "http://dl.bintray.com/content/lightshed/maven"
 
-libraryDependencies += "me.lessis" %% "courier" % "0.1.3"
+libraryDependencies += "ch.lightshed" %% "courier" % "0.1.4"
 ```
 
-Via [a more civilized method](https://github.com/softprops/ls#readme) which will do the same without all the manual work.
-
-    > ls-install courier
-    
 Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
     
 ```scala
-resolvers += bintray.Opts.resolver.repo("softprops", "maven")
+resolvers += Resolver.bintrayRepo("lightshed", "maven")
 ```
 
 ## usage
@@ -86,7 +82,9 @@ class MailSpec extends Specification with NoTimeConversions {
           val momsMsg = momsInbox.get(0)
           momsMsg.getContent === "hi mom"
           momsMsg.getSubject === "miss you"
-        }       	  	}  }
+        }       	
+  	}
+  }
 }        
 ```
 

@@ -1,8 +1,8 @@
-organization := "me.lessis"
+organization := "ch.lightshed"
 
 name := "courier"
 
-version := "0.1.4"
+version := "0.1.4-SNAPSHOT"
 
 description := "deliver electronic mail with scala"
 
@@ -20,15 +20,11 @@ crossScalaVersions := Seq("2.10.4", "2.11.8", "2.12.0")
 
 scalaVersion := crossScalaVersions.value.last
 
-seq(bintraySettings:_*)
+bintrayOrganization := Some("lightshed")
 
-bintray.Keys.packageLabels in bintray.Keys.bintray := Seq("email", "mail", "javamail")
+bintrayReleaseOnPublish in ThisBuild := false
 
-seq(lsSettings:_*)
-
-LsKeys.tags in LsKeys.lsync := (bintray.Keys.packageLabels in bintray.Keys.bintray).value
-
-externalResolvers in LsKeys.lsync := (resolvers in bintray.Keys.bintray).value
+bintrayPackageLabels := Seq("email", "mail", "javamail")
 
 pomExtra := (
   <scm>
