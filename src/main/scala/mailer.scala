@@ -15,7 +15,10 @@ case class Mailer(
 
   def apply(e: Envelope)(implicit ec: ExecutionContext): Future[Unit] = {
     val msg = new MimeMessage(_session) {
-      e.subject.map(setSubject(_))
+      e.subject.foreach {
+        case (subject, Some(charset)) => setSubject(subject, charset.name())
+        case (subject, None) => setSubject(subject)
+      }
       setFrom(e.from)
       e.to.foreach(addRecipient(Message.RecipientType.TO, _))
       e.cc.foreach(addRecipient(Message.RecipientType.CC, _))
