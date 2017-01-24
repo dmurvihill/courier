@@ -17,7 +17,7 @@ libraryDependencies += "me.lessis" %% "courier" % "0.1.3"
 Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
     
 ```scala
-resolvers += bintray.Opts.resolver.repo("softprops", "maven")
+resolvers += Resolver.bintrayRepo("softprops", "maven")
 ```
 
 ## usage

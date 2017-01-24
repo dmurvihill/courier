@@ -2,7 +2,7 @@ organization := "me.lessis"
 
 name := "courier"
 
-version := "0.1.3"
+version := "0.1.4-SNAPSHOT"
 
 description := "deliver electronic mail with scala"
 
@@ -20,9 +20,9 @@ crossScalaVersions := Seq("2.10.4", "2.11.1")
 
 scalaVersion := crossScalaVersions.value.last
 
-seq(bintraySettings:_*)
+bintrayReleaseOnPublish in ThisBuild := false
 
-bintray.Keys.packageLabels in bintray.Keys.bintray := Seq("email", "mail", "javamail")
+bintrayPackageLabels := Seq("email", "mail", "javamail")
 
 pomExtra := (
   <scm>
