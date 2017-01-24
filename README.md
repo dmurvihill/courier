@@ -9,15 +9,15 @@ deliver electronic mail with scala from the [future](http://www.scala-lang.org/a
 Via the copy and paste method
 
 ```scala
-resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven"
+resolvers += "lightshed-maven" at "http://dl.bintray.com/content/lightshed/maven"
 
-libraryDependencies += "me.lessis" %% "courier" % "0.1.3"
+libraryDependencies += "ch.lightshed" %% "courier" % "0.1.4"
 ```
 
 Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
     
 ```scala
-resolvers += Resolver.bintrayRepo("softprops", "maven")
+resolvers += Resolver.bintrayRepo("lightshed", "maven")
 ```
 
 ## usage
