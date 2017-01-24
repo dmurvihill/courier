@@ -10,7 +10,7 @@ object Envelope {
 
 case class Envelope(
   from: InternetAddress,
-  _subject: Option[(String, Charset)] = None,
+  _subject: Option[(String, Option[Charset])] = None,
   _to: Seq[InternetAddress] = Seq.empty[InternetAddress],
   _cc: Seq[InternetAddress] = Seq.empty[InternetAddress],
   _bcc: Seq[InternetAddress] = Seq.empty[InternetAddress],
@@ -19,8 +19,8 @@ case class Envelope(
   _headers: Seq[(String, String)] = Seq.empty[(String, String)],
   _content: Content = Text("")) {
 
-  def subject(s: String) = copy(_subject = Some(s, Charset.defaultCharset()))
-  def subject(s: String, ch: Charset) = copy(_subject = Some(s, ch))
+  def subject(s: String) = copy(_subject = Some(s, None))
+  def subject(s: String, ch: Charset) = copy(_subject = Some(s, Some(ch)))
   def to(addrs: InternetAddress*) = copy(_to = _to ++ addrs)
   def cc(addrs: InternetAddress*) = copy(_cc = _cc ++ addrs)
   def bcc(addrs: InternetAddress*) = copy(_bcc = _bcc ++ addrs)
