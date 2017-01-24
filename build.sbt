@@ -1,4 +1,4 @@
-organization := "me.lessis"
+organization := "ch.lightshed"
 
 name := "courier"
 
@@ -19,6 +19,8 @@ homepage := Some(url(s"https://github.com/softprops/${name.value}/#readme"))
 crossScalaVersions := Seq("2.10.4", "2.11.1")
 
 scalaVersion := crossScalaVersions.value.last
+
+bintrayOrganization := Some("lightshed")
 
 bintrayReleaseOnPublish in ThisBuild := false
 
