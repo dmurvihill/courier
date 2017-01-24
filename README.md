@@ -15,7 +15,7 @@ libraryDependencies += "ch.lightshed" %% "courier" % "0.1.4"
 ```
 
 Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
-    
+
 ```scala
 resolvers += Resolver.bintrayRepo("lightshed", "maven")
 ```
@@ -30,7 +30,7 @@ val mailer = Mailer("smtp.gmail.com", 587)
                .auth(true)
                .as("you@gmail.com", "p@$$w3rd")
                .startTtls(true)()
-                     
+
 mailer(Envelope.from("you" `@` "gmail.com")
         .to("mom" `@` "gmail.com")
         .cc("dad" `@` "gmail.com")
@@ -75,7 +75,7 @@ class MailSpec extends Specification with NoTimeConversions {
           	.cc("dad@gmail.com")
           	.subject("miss you")
           	.content(Text("hi mom")))
-          	
+
           Await.ready(future, 5.seconds)
           val momsInbox = Mailbox.get("mom@gmail.com")
           momsInbox.size === 1

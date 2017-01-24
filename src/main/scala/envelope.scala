@@ -34,5 +34,6 @@ case class Envelope(
   def to = _to
   def cc = _cc
   def bcc = _bcc
+  def replyTo = _replyTo
   def headers = _headers
 }

@@ -20,6 +20,7 @@ case class Mailer(
       e.to.foreach(addRecipient(Message.RecipientType.TO, _))
       e.cc.foreach(addRecipient(Message.RecipientType.CC, _))
       e.bcc.foreach(addRecipient(Message.RecipientType.BCC, _))
+      e.replyTo.foreach(a => setReplyTo(Array(a)))
       e.headers.foreach(h => addHeader(h._1, h._2))
       e.contents match {
         case Text(txt, charset) => setText(txt, charset.displayName)
