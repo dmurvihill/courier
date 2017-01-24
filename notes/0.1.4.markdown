@@ -1,3 +1,10 @@
 # fixes
 
-* The reply-to address was not being sent [laurencer][https://github.com/laurencer]
+* [#17](https://github.com/softprops/courier/pull/17) The reply-to address was not being sent - [laurencer](https://github.com/laurencer)
+* [#13](https://github.com/softprops/courier/pull/13) Allow to set charset for subject - [tzeman77](https://github.com/tzeman77)
+
+# enhancements 
+* [#19](https://github.com/softprops/courier/pull/19) Add Scala 2.12 support - [rleibman](https://github.com/rleibman)
+
+# misc
+* [#18](https://github.com/softprops/courier/pull/18) Use implicit class [ChristopherDavenport](https://github.com/ChristopherDavenport)
