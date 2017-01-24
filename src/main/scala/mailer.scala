@@ -9,8 +9,7 @@ object Mailer {
     Mailer().session.host(host).port(port)
 }
 
-case class Mailer(
-  _session: MailSession = Defaults.session) {
+case class Mailer(_session: MailSession = Defaults.session) {
   def session = Session.Builder(this)
 
   def apply(e: Envelope)(implicit ec: ExecutionContext): Future[Unit] = {

@@ -8,14 +8,12 @@ import javax.mail.util.ByteArrayDataSource
 
 sealed trait Content
 
-case class Text(body: String, charset: Charset = Charset.defaultCharset)
-  extends Content
+case class Text(body: String, charset: Charset = Charset.defaultCharset) extends Content
 
-case class Multipart(
-  _parts: Seq[MimeBodyPart] = Seq.empty[MimeBodyPart])
-  extends Content {
+case class Multipart(_parts: Seq[MimeBodyPart] = Seq.empty[MimeBodyPart]) extends Content {
   def add(part: MimeBodyPart): Multipart =
     Multipart(_parts :+ part)
+
   def add(
     bytes: Array[Byte],
     mimetype: String,
@@ -24,9 +22,9 @@ case class Multipart(
     description: Option[String] = None): Multipart =
     add(new MimeBodyPart {
       setContent(bytes, mimetype)
-      disposition.map(setDisposition(_))
-      description.map(setDescription(_))
-      name.map(setFileName(_))
+      disposition.foreach(setDisposition)
+      description.foreach(setDescription)
+      name.foreach(setFileName)
     })
 
   def text(str: String) =

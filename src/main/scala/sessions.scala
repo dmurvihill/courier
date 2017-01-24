@@ -38,6 +38,6 @@ object Session {
               new PasswordAuthentication(user, pass)
           }
       }
-      .getOrElse(null)))
+      .orNull))
   }
 }
