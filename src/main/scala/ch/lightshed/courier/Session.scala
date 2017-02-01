@@ -14,17 +14,17 @@ object Session {
     _port: Option[Int] = None,
     _debug: Option[Boolean] = None,
     _creds: Option[(String, String)] = None) {
-    def auth(a: Boolean) = copy(_auth= Some(a))
-    def startTls(s: Boolean) = copy(_startTls = Some(s))
-    def ssl(l: Boolean) = copy(_ssl = Some(l))
-    def host(h: String) = copy(_host = Some(h))
-    def port(p: Int) = copy(_port = Some(p))
-    def debug(d: Boolean) = copy(_debug = Some(d))
-    def as(user: String, pass: String) =
+    def auth(a: Boolean): Builder = copy(_auth= Some(a))
+    def startTls(s: Boolean): Builder = copy(_startTls = Some(s))
+    def ssl(l: Boolean): Builder = copy(_ssl = Some(l))
+    def host(h: String): Builder = copy(_host = Some(h))
+    def port(p: Int): Builder = copy(_port = Some(p))
+    def debug(d: Boolean): Builder = copy(_debug = Some(d))
+    def as(user: String, pass: String): Builder =
       copy(_creds = Some((user, pass)))
-    def socketFactory(cls: String) = copy(_socketFactory = Some(cls))
-    def sslSocketFactory = socketFactory("javax.net.ssl.SSLSocketFactory")
-    def apply() =
+    def socketFactory(cls: String): Builder = copy(_socketFactory = Some(cls))
+    def sslSocketFactory: Builder = socketFactory("javax.net.ssl.SSLSocketFactory")
+    def apply(): Mailer =
       mailer.copy(_session = MailSession.getInstance(
         new Properties(System.getProperties) {
         _debug.map(d => put("mail.smtp.debug", d.toString))

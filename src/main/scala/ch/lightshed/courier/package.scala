@@ -7,8 +7,8 @@ package object courier {
 
   implicit class addr(name: String){
     def `@`(domain: String): InternetAddress = new InternetAddress(s"$name@$domain")
-    def at = `@` _
+    def at: String => InternetAddress = `@`
     /** In case whole string is email address already */
-    def addr = new InternetAddress(name)
+    def addr: InternetAddress = new InternetAddress(name)
   }
 }

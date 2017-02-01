@@ -27,29 +27,29 @@ case class Multipart(_parts: Seq[MimeBodyPart] = Seq.empty[MimeBodyPart]) extend
       name.foreach(setFileName)
     })
 
-  def text(str: String) =
+  def text(str: String): Multipart =
     add(new MimeBodyPart {
       setContent(str, "text/plain")
     })
 
-  def html(str: String) =
+  def html(str: String): Multipart =
     add(new MimeBodyPart {
       setContent(str, "text/html")
     })
 
-  def attach(file: File, name: Option[String] = None) =
+  def attach(file: File, name: Option[String] = None): Multipart =
     add(new MimeBodyPart {
       setDataHandler(new DataHandler(new FileDataSource(file)))
       setFileName(name.getOrElse(file.getName))
     })
 
-  def attachBytes(bytes: Array[Byte], name: String, mimeType: String) =
+  def attachBytes(bytes: Array[Byte], name: String, mimeType: String): Multipart =
     add(new MimeBodyPart {
       setDataHandler(new DataHandler(new ByteArrayDataSource(bytes, mimeType)))
       setFileName(name)
     })
 
-  def parts =
+  def parts: MimeMultipart =
     new MimeMultipart() {
       _parts.foreach(addBodyPart(_))
     }

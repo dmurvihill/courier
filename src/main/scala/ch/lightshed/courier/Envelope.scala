@@ -4,8 +4,7 @@ import java.nio.charset.Charset
 import javax.mail.internet.InternetAddress
 
 object Envelope {
-  def from(addr: InternetAddress) =
-    Envelope(addr)
+  def from(addr: InternetAddress): Envelope = Envelope(addr)
 }
 
 case class Envelope(
@@ -19,23 +18,23 @@ case class Envelope(
   _headers: Seq[(String, String)] = Seq.empty[(String, String)],
   _content: Content = Text("")) {
 
-  def subject(s: String) = copy(_subject = Some(s, None))
-  def subject(s: String, ch: Charset) = copy(_subject = Some(s, Some(ch)))
-  def to(addrs: InternetAddress*) = copy(_to = _to ++ addrs)
-  def cc(addrs: InternetAddress*) = copy(_cc = _cc ++ addrs)
-  def bcc(addrs: InternetAddress*) = copy(_bcc = _bcc ++ addrs)
-  def replyTo(addr: InternetAddress) = copy(_replyTo = Some(addr))
-  def replyAll = copy(_replyToAll = Some(true))
-  def headers(hdrs: (String, String)*) = copy(_headers = _headers ++ hdrs)
-  def content(c: Content) = copy(_content = c)
+  def subject(s: String): Envelope = copy(_subject = Some(s, None))
+  def subject(s: String, ch: Charset): Envelope = copy(_subject = Some(s, Some(ch)))
+  def to(addrs: InternetAddress*): Envelope = copy(_to = _to ++ addrs)
+  def cc(addrs: InternetAddress*): Envelope = copy(_cc = _cc ++ addrs)
+  def bcc(addrs: InternetAddress*): Envelope = copy(_bcc = _bcc ++ addrs)
+  def replyTo(addr: InternetAddress): Envelope = copy(_replyTo = Some(addr))
+  def replyAll: Envelope = copy(_replyToAll = Some(true))
+  def headers(hdrs: (String, String)*): Envelope = copy(_headers = _headers ++ hdrs)
+  def content(c: Content): Envelope = copy(_content = c)
 
-  def contents = _content
-  def subject = _subject
+  def contents: Content = _content
+  def subject: Option[(String, Option[Charset])] = _subject
   @deprecated("use `to` instead", "0.1.1")
-  def recipients = _to
-  def to = _to
-  def cc = _cc
-  def bcc = _bcc
-  def replyTo = _replyTo
-  def headers = _headers
+  def recipients: Seq[InternetAddress] = _to
+  def to: Seq[InternetAddress] = _to
+  def cc: Seq[InternetAddress] = _cc
+  def bcc: Seq[InternetAddress] = _bcc
+  def replyTo: Option[InternetAddress] = _replyTo
+  def headers: Seq[(String, String)] = _headers
 }
