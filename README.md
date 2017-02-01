@@ -62,42 +62,9 @@ For available properties, see [JavaMail docs](https://javamail.java.net/nonav/do
 
 ## testing
 
-Since courier is based on JavaMail, you can use [Mock JavaMail](https://java.net/projects/mock-javamail) to execute your tests. Simply add the following to your `build.sbt`:
-
-```scala
-libraryDependencies += "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % "test"
-```
-
-Having this in your test dependencies will automatically enable Mock JavaMail during tests. You can then test for email sends, etc.
-
-```scala
-import ch.lightshed.courier._
-import org.specs2.mutable.Specification
-import scala.concurrent.duration._
-
-// Need NoTimeConversions to prevent conflict with scala.concurrent.duration._
-class MailSpec extends Specification with NoTimeConversions {
-  "the mailer" should {
-  	"send an email" in {
-  	  val mailer = Mailer("localhost", 25)()
-  	  val future = mailer(Envelope.from("someone@example.com".addr)
-          	.to("mom@gmail.com".addr)
-          	.cc("dad@gmail.com".addr)
-          	.subject("miss you")
-          	.content(Text("hi mom")))
-
-          Await.ready(future, 5.seconds)
-          val momsInbox = Mailbox.get("mom@gmail.com")
-          momsInbox.size === 1
-          val momsMsg = momsInbox.get(0)
-          momsMsg.getContent === "hi mom"
-          momsMsg.getSubject === "miss you"
-        }       	
-  	}
-  }
-}        
-```
-
+Since courier is based on JavaMail, you can use [Mock JavaMail](https://java.net/projects/mock-javamail) to execute your tests.
 [Here](https://weblogs.java.net/blog/2007/04/26/introducing-mock-javamail-project) is an excellent article on using Mock JavaMail.
+
+See [MailerSpec.scala](src/test/scala/ch/lightshed/courier/MailerSpec.scala) for an example.
 
 Doug Tangren (softprops) 2013
