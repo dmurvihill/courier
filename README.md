@@ -59,6 +59,7 @@ For available properties, see [JavaMail docs](https://javamail.java.net/nonav/do
 
 ## Upgrade notes for 0.1.x users
 * Package has been renamed from `courier` to `ch.lightshed.courier`
+* Removed deprecated accessor method `Envelope.recipients`
 
 ## testing
 

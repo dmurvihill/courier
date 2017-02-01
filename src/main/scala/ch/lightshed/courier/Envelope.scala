@@ -30,8 +30,6 @@ case class Envelope(
 
   def contents: Content = _content
   def subject: Option[(String, Option[Charset])] = _subject
-  @deprecated("use `to` instead", "0.1.1")
-  def recipients: Seq[InternetAddress] = _to
   def to: Seq[InternetAddress] = _to
   def cc: Seq[InternetAddress] = _cc
   def bcc: Seq[InternetAddress] = _bcc

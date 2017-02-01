@@ -9,3 +9,4 @@
 
 # mics
 * Change package name from `courier` to `ch.lightshed.courier`
+* [#32](https://github.com/softprops/courier/issues/32) Remove deprecated accessor method `Envelope.recipients` 
