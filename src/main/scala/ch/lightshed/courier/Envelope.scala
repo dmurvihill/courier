@@ -1,4 +1,4 @@
-package courier
+package ch.lightshed.courier
 
 import java.nio.charset.Charset
 import javax.mail.internet.InternetAddress

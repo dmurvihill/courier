@@ -1,3 +1,5 @@
+package ch.lightshed
+
 import javax.mail.internet.InternetAddress
 
 /** An agreeable email interface for scala. */

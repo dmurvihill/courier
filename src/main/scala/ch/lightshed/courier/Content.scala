@@ -1,4 +1,4 @@
-package courier
+package ch.lightshed.courier
 
 import javax.activation.{ DataHandler, FileDataSource }
 import javax.mail.internet.{ MimeBodyPart, MimeMultipart }

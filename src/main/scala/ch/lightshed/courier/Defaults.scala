@@ -1,4 +1,4 @@
-package courier
+package ch.lightshed.courier
 
 import javax.mail.{Session => MailSession}
 import java.util.Properties

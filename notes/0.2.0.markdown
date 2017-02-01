@@ -7,3 +7,5 @@
 * [#14](https://github.com/softprops/courier/pull/14) Mail session should use system properties initially - [tzeman77](https://github.com/tzeman77)
 * [#15](https://github.com/softprops/courier/pull/15) Adding support for SSL/TLS - [mikeokner](https://github.com/mikeokner)
 
+# mics
+* Change package name from `courier` to `ch.lightshed.courier`

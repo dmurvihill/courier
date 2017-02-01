@@ -57,6 +57,9 @@ If using SSL/TLS instead of STARTTLS, substitute `.startTls(true)` with `.ssl(tr
 The default behaviour the mail session can be configured via system properties. 
 For available properties, see [JavaMail docs](https://javamail.java.net/nonav/docs/api/com/sun/mail/smtp/package-summary.html#properties).
 
+## Upgrade notes for 0.1.x users
+* Package has been renamed from `courier` to `ch.lightshed.courier`
+
 ## testing
 
 Since courier is based on JavaMail, you can use [Mock JavaMail](https://java.net/projects/mock-javamail) to execute your tests. Simply add the following to your `build.sbt`:
@@ -68,7 +71,7 @@ libraryDependencies += "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % "te
 Having this in your test dependencies will automatically enable Mock JavaMail during tests. You can then test for email sends, etc.
 
 ```scala
-import courier._
+import ch.lightshed.courier._
 import org.specs2.mutable.Specification
 import scala.concurrent.duration._
 
