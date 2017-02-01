@@ -69,7 +69,7 @@ import scala.concurrent.duration._
 class MailSpec extends Specification with NoTimeConversions {
   "the mailer" should {
   	"send an email" in {
-  	  val mailer = Mailer("localhost", 25)
+  	  val mailer = Mailer("localhost", 25)()
   	  val future = mailer(Envelope.from("someone@example.com".addr)
           	.to("mom@gmail.com".addr)
           	.cc("dad@gmail.com".addr)
