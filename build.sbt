@@ -7,7 +7,7 @@ version := "0.2.0-SNAPSHOT"
 description := "deliver electronic mail with scala"
 
 libraryDependencies ++= Seq(
-  "javax.mail"              %  "mail"            % "1.4.7",
+  "com.sun.mail"            %  "javax.mail"      % "1.5.6",
   "javax.activation"        %  "activation"      % "1.1.1",
   "org.specs2"              %% "specs2-core"     % "3.8.7"  % "test",
   "org.jvnet.mock-javamail" % "mock-javamail"    % "1.9"    % "test"
