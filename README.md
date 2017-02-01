@@ -52,6 +52,11 @@ mailer(Envelope.from("you" `@` "work.com")
 
 If using SSL/TLS instead of STARTTLS, substitute `.startTls(true)` with `.ssl(true)` when setting up the `Mailer`.
 
+## configuration
+
+The default behaviour the mail session can be configured via system properties. 
+For available properties, see [JavaMail docs](https://javamail.java.net/nonav/docs/api/com/sun/mail/smtp/package-summary.html#properties).
+
 ## testing
 
 Since courier is based on JavaMail, you can use [Mock JavaMail](https://java.net/projects/mock-javamail) to execute your tests. Simply add the following to your `build.sbt`:
