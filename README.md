@@ -88,6 +88,6 @@ class MailSpec extends Specification with NoTimeConversions {
 }        
 ```
 
-[Here](https://weblogs.java.net/blog/2007/04/26/introducing-mock-javamail-project) is an excellent article on using Mock JavaMail.
+[Here](https://community.oracle.com/blogs/kohsuke/2007/04/26/introducing-mock-javamail-project) is an excellent article on using Mock JavaMail.
 
 Doug Tangren (softprops) 2013
