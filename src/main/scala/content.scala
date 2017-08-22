@@ -10,9 +10,9 @@ sealed trait Content
 
 case class Text(body: String, charset: Charset = Charset.defaultCharset) extends Content
 
-case class Multipart(_parts: Seq[MimeBodyPart] = Seq.empty[MimeBodyPart]) extends Content {
+case class Multipart(_parts: Seq[MimeBodyPart] = Seq.empty[MimeBodyPart], subtype: String = "mixed") extends Content {
   def add(part: MimeBodyPart): Multipart =
-    Multipart(_parts :+ part)
+    this.copy(_parts = _parts :+ part)
 
   def add(
     bytes: Array[Byte],
@@ -50,7 +50,7 @@ case class Multipart(_parts: Seq[MimeBodyPart] = Seq.empty[MimeBodyPart]) extend
     })
 
   def parts =
-    new MimeMultipart() {
+    new MimeMultipart(subtype) {
       _parts.foreach(addBodyPart(_))
     }
 }
