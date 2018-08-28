@@ -1,15 +1,16 @@
 package courier
 
-import javax.mail.{ Message, Session => MailSession, Transport }
 import javax.mail.internet.MimeMessage
-import scala.concurrent.{ ExecutionContext, Future }
+import javax.mail.{Message, Transport, Session => MailSession}
+
+import scala.concurrent.{ExecutionContext, Future}
 
 object Mailer {
   def apply(host: String, port: Int): Session.Builder =
     Mailer().session.host(host).port(port)
 }
 
-case class Mailer(_session: MailSession = Defaults.session) {
+case class Mailer(_session: MailSession = Defaults.session, signer: Option[Signer] = None) {
   def session = Session.Builder(this)
 
   def apply(e: Envelope)(implicit ec: ExecutionContext): Future[Unit] = {
@@ -26,7 +27,10 @@ case class Mailer(_session: MailSession = Defaults.session) {
       e.headers.foreach(h => addHeader(h._1, h._2))
       e.contents match {
         case Text(txt, charset) => setText(txt, charset.displayName)
-        case mp : Multipart => setContent(mp.parts)
+        case mp: Multipart => setContent(mp.parts)
+        case Signed(body) =>
+          if(signer.isDefined) setContent(signer.get.sign(body))
+          else throw new IllegalArgumentException("No signer defined, cannot sign!")
       }
     }
     Future {
@@ -34,3 +38,5 @@ case class Mailer(_session: MailSession = Defaults.session) {
     }
   }
 }
+
+
