@@ -1,14 +1,17 @@
 package courier
 
-import javax.activation.{ DataHandler, FileDataSource }
-import javax.mail.internet.{ MimeBodyPart, MimeMultipart }
 import java.io.File
 import java.nio.charset.Charset
+
+import javax.activation.{DataHandler, FileDataSource}
+import javax.mail.internet.{MimeBodyPart, MimeMultipart}
 import javax.mail.util.ByteArrayDataSource
 
 sealed trait Content
 
 case class Text(body: String, charset: Charset = Charset.defaultCharset) extends Content
+
+case class Signed(body: Content) extends Content
 
 case class Multipart(_parts: Seq[MimeBodyPart] = Seq.empty[MimeBodyPart], subtype: String = "mixed") extends Content {
   def add(part: MimeBodyPart): Multipart =
