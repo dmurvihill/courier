@@ -22,12 +22,6 @@ crossScalaVersions := Seq("2.10.4", "2.11.8", "2.12.0")
 
 scalaVersion := crossScalaVersions.value.last
 
-bintrayOrganization := Some("lightshed")
-
-bintrayReleaseOnPublish in ThisBuild := false
-
-bintrayPackageLabels := Seq("email", "mail", "javamail")
-
 pomExtra := (
   <scm>
     <url>git@github.com:softprops/courier.git</url>
