@@ -7,7 +7,7 @@ version := "0.2.0"
 description := "deliver electronic mail with scala"
 
 libraryDependencies ++= Seq(
-  "javax.mail"        % "mail"            % "1.4.7",
+  "com.sun.mail"      % "javax.mail"      % "1.6.2",
   "javax.activation"  % "activation"      % "1.1.1",
   "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.60",
   "org.bouncycastle"  % "bcmail-jdk15on"  % "1.60"
