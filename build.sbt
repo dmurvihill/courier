@@ -7,8 +7,10 @@ version := "0.1.4"
 description := "deliver electronic mail with scala"
 
 libraryDependencies ++= Seq(
-  "javax.mail"        % "mail"        % "1.4.7",
-  "javax.activation"  % "activation"  % "1.1.1"
+  "javax.mail"        % "mail"            % "1.4.7",
+  "javax.activation"  % "activation"      % "1.1.1",
+  "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.60",
+  "org.bouncycastle"  % "bcmail-jdk15on"  % "1.60"
 )
 
 licenses := Seq(

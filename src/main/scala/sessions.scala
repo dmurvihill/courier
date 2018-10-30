@@ -12,7 +12,8 @@ object Session {
     _host: Option[String] = None,
     _port: Option[Int] = None,
     _debug: Option[Boolean] = None,
-    _creds: Option[(String, String)] = None) {
+    _creds: Option[(String, String)] = None,
+    _signer: Option[Signer] = None) {
     def auth(a: Boolean) = copy(_auth= Some(a))
     def startTtls(s: Boolean) = copy(_startTtls = Some(s))
     def host(h: String) = copy(_host = Some(h))
@@ -22,6 +23,7 @@ object Session {
       copy(_creds = Some((user, pass)))
     def socketFactory(cls: String) = copy(_socketFactory = Some(cls))
     def sslSocketFactory = socketFactory("javax.net.ssl.SSLSocketFactory")
+    def withSigner(s: Signer): Builder = copy(_signer=Some(s))
     def apply() =
       mailer.copy(_session = MailSession.getInstance(new Properties {
         _debug.map(d => put("mail.smtp.debug", d.toString))
@@ -38,6 +40,7 @@ object Session {
               new PasswordAuthentication(user, pass)
           }
       }
-      .orNull))
+      .orNull),
+        signer=_signer)
   }
 }
