@@ -27,7 +27,8 @@ object Session {
     def sslSocketFactory = socketFactory("javax.net.ssl.SSLSocketFactory")
     def withSigner(s: Signer): Builder = copy(_signer=Some(s))
     def apply() =
-      mailer.copy(_session = MailSession.getInstance(new Properties {
+      mailer.copy(_session = MailSession.getInstance(
+        new Properties(System.getProperties) {
         _debug.map(d => put("mail.smtp.debug", d.toString))
         _auth.map(a => put("mail.smtp.auth", a.toString))
         // enable ESMTP
