@@ -29,8 +29,7 @@ import courier._, Defaults._
 val mailer = Mailer("smtp.gmail.com", 587)
                .auth(true)
                .as("you@gmail.com", "p@$$w3rd")
-               .startTtls(true)()
-
+               .startTls(true)()
 mailer(Envelope.from("you" `@` "gmail.com")
         .to("mom" `@` "gmail.com")
         .cc("dad" `@` "gmail.com")
@@ -49,6 +48,8 @@ mailer(Envelope.from("you" `@` "work.com")
              case _ => println("delivered report")
            }
 ```
+
+If using SSL/TLS instead of STARTTLS, substitute `.startTls(true)` with `.ssl(true)` when setting up the `Mailer`.
 
 ## testing
 
@@ -82,10 +83,10 @@ class MailSpec extends Specification with NoTimeConversions {
           val momsMsg = momsInbox.get(0)
           momsMsg.getContent === "hi mom"
           momsMsg.getSubject === "miss you"
-        }       	
+        }
   	}
   }
-}        
+}
 ```
 
 [Here](https://community.oracle.com/blogs/kohsuke/2007/04/26/introducing-mock-javamail-project) is an excellent article on using Mock JavaMail.
