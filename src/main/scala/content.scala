@@ -35,9 +35,9 @@ case class Multipart(_parts: Seq[MimeBodyPart] = Seq.empty[MimeBodyPart], subtyp
       setContent(str, "text/plain")
     })
 
-  def html(str: String) =
+  def html(str: String, charset: Charset = Charset.defaultCharset) =
     add(new MimeBodyPart {
-      setContent(str, "text/html")
+      setContent(str, s"text/html; charset=${charset.displayName()}")
     })
 
   def attach(file: File, name: Option[String] = None) =
