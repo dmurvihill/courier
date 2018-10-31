@@ -1,5 +1,7 @@
 # courier
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.daddykotex/courier_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.daddykotex/courier_2.12)
+
 deliver electronic mail with scala from the [future](http://www.scala-lang.org/api/current/index.html#scala.concurrent.Future)
 
 ![courier](http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Courrier.jpg/337px-Courrier.jpg)
@@ -9,15 +11,7 @@ deliver electronic mail with scala from the [future](http://www.scala-lang.org/a
 Via the copy and paste method
 
 ```scala
-resolvers += "lightshed-maven" at "http://dl.bintray.com/content/lightshed/maven"
-
-libraryDependencies += "ch.lightshed" %% "courier" % "0.1.4"
-```
-
-Note. If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
-
-```scala
-resolvers += Resolver.bintrayRepo("lightshed", "maven")
+libraryDependencies += "com.github.daddykotex" %% "courier" % "1.0.0-RC1"
 ```
 
 ## usage
@@ -29,8 +23,7 @@ import courier._, Defaults._
 val mailer = Mailer("smtp.gmail.com", 587)
                .auth(true)
                .as("you@gmail.com", "p@$$w3rd")
-               .startTtls(true)()
-
+               .startTls(true)()
 mailer(Envelope.from("you" `@` "gmail.com")
         .to("mom" `@` "gmail.com")
         .cc("dad" `@` "gmail.com")
@@ -50,11 +43,14 @@ mailer(Envelope.from("you" `@` "work.com")
            }
 ```
 
+If using SSL/TLS instead of STARTTLS, substitute `.startTls(true)` with `.ssl(true)` when setting up the `Mailer`.
+
 ### S/MIME
 Courier supports sending S/MIME signed email through its optional dependencies on the Bouncycastle cryptography libraries. It does not yet support sending encrypted email.
 
 Make sure the Mailer is instantiated with a signer, and then wrap your message in a Signed() object.
 
+```scala
 import courier._
 import java.security.cert.X509Certificate
 import java.security.PrivateKey
@@ -76,6 +72,7 @@ val envelope = Envelope
         .content(Signed(Text("For all I know, you're the rat.")))
 
 mailer(envelope)
+```
 
 
 ## testing
@@ -110,12 +107,12 @@ class MailSpec extends Specification with NoTimeConversions {
           val momsMsg = momsInbox.get(0)
           momsMsg.getContent === "hi mom"
           momsMsg.getSubject === "miss you"
-        }       	
+        }
   	}
   }
-}        
+}
 ```
 
 [Here](https://community.oracle.com/blogs/kohsuke/2007/04/26/introducing-mock-javamail-project) is an excellent article on using Mock JavaMail.
 
-Doug Tangren (softprops) 2013
+(C) Doug Tangren (softprops) and others, 2013-2018
