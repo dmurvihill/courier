@@ -1,5 +1,7 @@
 # courier
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.daddykotex/courier/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.daddykotex/courier)
+
 deliver electronic mail with scala from the [future](http://www.scala-lang.org/api/current/index.html#scala.concurrent.Future)
 
 ![courier](http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Courrier.jpg/337px-Courrier.jpg)
