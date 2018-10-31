@@ -2,11 +2,7 @@ addCommandAlias("ci", ";clean ;+test")
 addCommandAlias("release", ";project root ;+publishSigned ;sonatypeReleaseAll")
 
 lazy val gpgSettings = Seq(
-  useGpg := false,
-  usePgpKeyHex("207D456D7C29DAB2"),
-  pgpPublicRing := file(".") / "project" / ".gnupg" / "pubring.gpg",
-  pgpSecretRing := file(".") / "project" / ".gnupg" / "secring.gpg",
-  pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray)
+  useGpg := true
 )
 
 lazy val publisherSettings = Seq(
