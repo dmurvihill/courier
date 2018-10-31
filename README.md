@@ -50,6 +50,34 @@ mailer(Envelope.from("you" `@` "work.com")
            }
 ```
 
+### S/MIME
+Courier supports sending S/MIME signed email through its optional dependencies on the Bouncycastle cryptography libraries. It does not yet support sending encrypted email.
+
+Make sure the Mailer is instantiated with a signer, and then wrap your message in a Signed() object.
+
+import courier._
+import java.security.cert.X509Certificate
+import java.security.PrivateKey
+
+val certificate: X509Certificate = ???
+val privateKey: PrivateKey = ???
+val trustChain: Set[X509Certificate] = ???
+
+val signer = Signer(privateKey, certificate, trustChain)
+val mailer = Mailer("smtp.gmail.com", 587)
+               .auth(true)
+               .as("you@gmail.com", "p@$$w3rd")
+               .withSigner(signer)
+               .startTtls(true)()
+val envelope = Envelope
+        .from("mr_pink" `@` "gmail.com")
+        .to("mr_white" `@` "gmail.com")
+        .subject("the jewelry store")
+        .content(Signed(Text("For all I know, you're the rat.")))
+
+mailer(envelope)
+
+
 ## testing
 
 Since courier is based on JavaMail, you can use [Mock JavaMail](https://java.net/projects/mock-javamail) to execute your tests. Simply add the following to your `build.sbt`:
