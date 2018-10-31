@@ -5,14 +5,15 @@ lazy val gpgSettings = Seq(
   useGpg := true
 )
 
+lazy val credentialSettings = Seq(
+  credentials ++= (for {
+    username <- Option(System.getenv().get("SONATYPE_USERNAME"))
+    password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
+  } yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
+)
+
 lazy val publisherSettings = Seq(
   sonatypeProfileName := organization.value,
-  credentials += Credentials(
-    "Sonatype Nexus Repository Manager",
-    "oss.sonatype.org",
-    sys.env.getOrElse("SONATYPE_USER", ""),
-    sys.env.getOrElse("SONATYPE_PASS", "")
-  ),
   publishMavenStyle := true,
   publishTo := Some(
     if (isSnapshot.value)
@@ -22,7 +23,7 @@ lazy val publisherSettings = Seq(
   )
 )
 
-lazy val releaseSettings = gpgSettings ++ publisherSettings
+lazy val releaseSettings = gpgSettings ++ publisherSettings ++ credentialSettings
 
 lazy val commonSettings = releaseSettings ++ Seq(
   version := "1.0.0-RC1",
