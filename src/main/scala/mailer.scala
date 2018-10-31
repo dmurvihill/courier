@@ -38,3 +38,5 @@ case class Mailer(_session: MailSession = Defaults.session, signer: Option[Signe
     }
   }
 }
+
+
