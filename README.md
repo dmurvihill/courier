@@ -83,36 +83,6 @@ Since courier is based on JavaMail, you can use [Mock JavaMail](https://java.net
 libraryDependencies += "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % "test"
 ```
 
-Having this in your test dependencies will automatically enable Mock JavaMail during tests. You can then test for email sends, etc.
-
-```scala
-import courier._
-import org.specs2.mutable.Specification
-import scala.concurrent.duration._
-
-// Need NoTimeConversions to prevent conflict with scala.concurrent.duration._
-class MailSpec extends Specification with NoTimeConversions {
-  "the mailer" should {
-  	"send an email" in {
-  	  val mailer = Mailer("localhost", 25)()
-  	  val future = mailer(Envelope.from("someone@example.com".addr)
-          	.to("mom@gmail.com".addr)
-          	.cc("dad@gmail.com".addr)
-          	.subject("miss you")
-          	.content(Text("hi mom")))
-
-          Await.ready(future, 5.seconds)
-          val momsInbox = Mailbox.get("mom@gmail.com")
-          momsInbox.size === 1
-          val momsMsg = momsInbox.get(0)
-          momsMsg.getContent === "hi mom"
-          momsMsg.getSubject === "miss you"
-        }
-  	}
-  }
-}
-```
-
-[Here](https://community.oracle.com/blogs/kohsuke/2007/04/26/introducing-mock-javamail-project) is an excellent article on using Mock JavaMail.
+With this library, you should, given a little bit of boilerplate, be able to set a test against a mocked Mailbox. This repo contains [an example](src/test/scala/mailspec.scala).
 
 (C) Doug Tangren (softprops) and others, 2013-2018
