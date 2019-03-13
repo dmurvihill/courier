@@ -46,3 +46,5 @@ worker*.log
 /bin
 .creds.sh
 project/.gnupg/
+.bloop/
+.metals/
