@@ -82,8 +82,6 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "com.sun.mail"      % "javax.mail"      % "1.6.2",
       "javax.activation"  % "activation"      % "1.1.1",
-      "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.60" % Optional,
-      "org.bouncycastle"  % "bcmail-jdk15on"  % "1.60" % Optional
       "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.61" % Optional,
       "org.bouncycastle"  % "bcmail-jdk15on"  % "1.61" % Optional,
       "org.scalactic"     %% "scalactic"      % "3.0.5" % Test,
