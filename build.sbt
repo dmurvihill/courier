@@ -26,12 +26,12 @@ lazy val publisherSettings = Seq(
 lazy val releaseSettings = gpgSettings ++ publisherSettings ++ credentialSettings
 
 lazy val commonSettings = releaseSettings ++ Seq(
-  version := "1.0.0-RC1",
+  version := "1.0.0",
   organization := "com.github.daddykotex",
   description := "deliver electronic mail with scala",
   licenses := Seq(("MIT", url("https://opensource.org/licenses/MIT"))),
   homepage := Some(url("https://github.com/dmurvihill/courier")),
-  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.7"),
+  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.8"),
   scalaVersion := crossScalaVersions.value.last,
   scmInfo := Some(
     ScmInfo(
@@ -84,5 +84,10 @@ lazy val root = (project in file("."))
       "javax.activation"  % "activation"      % "1.1.1",
       "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.60" % Optional,
       "org.bouncycastle"  % "bcmail-jdk15on"  % "1.60" % Optional
+      "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.61" % Optional,
+      "org.bouncycastle"  % "bcmail-jdk15on"  % "1.61" % Optional,
+      "org.scalactic"     %% "scalactic"      % "3.0.5" % Test,
+      "org.scalatest"     %% "scalatest"      % "3.0.5" % Test,
+      "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % Test
     )
   )
