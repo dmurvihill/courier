@@ -26,12 +26,12 @@ lazy val publisherSettings = Seq(
 lazy val releaseSettings = gpgSettings ++ publisherSettings ++ credentialSettings
 
 lazy val commonSettings = releaseSettings ++ Seq(
-  version := "1.0.0",
+  version := "2.0.0-RC1",
   organization := "com.github.daddykotex",
   description := "deliver electronic mail with scala",
   licenses := Seq(("MIT", url("https://opensource.org/licenses/MIT"))),
   homepage := Some(url("https://github.com/dmurvihill/courier")),
-  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.8"),
+  crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
   scalaVersion := crossScalaVersions.value.last,
   scmInfo := Some(
     ScmInfo(
@@ -57,12 +57,6 @@ lazy val commonSettings = releaseSettings ++ Seq(
 
 lazy val cFlags = Seq(
   scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, n)) if n <= 10 =>
-      Seq(
-        "-language:existentials",
-        "-language:higherKinds",
-        "-language:implicitConversions"
-      )
     case Some((2, n)) if n == 11 =>
       Seq(
         "-language:existentials",
@@ -70,10 +64,28 @@ lazy val cFlags = Seq(
         "-language:implicitConversions",
         "-Ypartial-unification"
       )
+    case Some((2, n)) if n == 12 =>
+      ScalacOptions.All ++ Seq(
+        "-language:existentials",
+        "-language:higherKinds",
+        "-language:implicitConversions",
+        "-Xfuture",
+        "-Xlint:by-name-right-associative",
+        "-Xlint:unsound-match",
+        "-Yno-adapted-args",
+        "-Ypartial-unification",
+        "-Ywarn-inaccessible",
+        "-Ywarn-infer-any",
+        "-Ywarn-nullary-override",
+        "-Ywarn-nullary-unit",
+        "-Ypartial-unification"
+      )
     case _ =>
       ScalacOptions.All
   })
 )
+
+lazy val scalaTestVersion = "3.0.8"
 
 lazy val root = (project in file("."))
   .settings(commonSettings ++ cFlags)
@@ -84,8 +96,8 @@ lazy val root = (project in file("."))
       "javax.activation"  % "activation"      % "1.1.1",
       "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.61" % Optional,
       "org.bouncycastle"  % "bcmail-jdk15on"  % "1.61" % Optional,
-      "org.scalactic"     %% "scalactic"      % "3.0.5" % Test,
-      "org.scalatest"     %% "scalatest"      % "3.0.5" % Test,
+      "org.scalactic"     %% "scalactic"      % scalaTestVersion % Test,
+      "org.scalatest"     %% "scalatest"      % scalaTestVersion % Test,
       "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % Test
     )
   )
