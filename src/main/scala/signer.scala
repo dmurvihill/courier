@@ -8,11 +8,9 @@ import org.bouncycastle.cert.jcajce.JcaCertStore
 import org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoGeneratorBuilder
 import org.bouncycastle.mail.smime.SMIMESignedGenerator
 
-import collection.JavaConverters._
-
 case class Signer(signingKey: PrivateKey, signingCert: X509Certificate, certStore: Set[X509Certificate]) {
   private val gen: SMIMESignedGenerator = new SMIMESignedGenerator()
-  private val certs = new JcaCertStore((certStore + signingCert).asJava)
+  private val certs = new JcaCertStore(Compat.asJava(certStore + signingCert))
   gen.addSignerInfoGenerator(new JcaSimpleSignerInfoGeneratorBuilder().build("SHA256withRSA", signingKey, signingCert))
   gen.addCertificates(certs)
 
