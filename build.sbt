@@ -1,9 +1,5 @@
 addCommandAlias("ci", ";clean ;+test")
-addCommandAlias("release", ";project root ;+publishSigned ;sonatypeReleaseAll")
-
-lazy val gpgSettings = Seq(
-  useGpg := true
-)
+addCommandAlias("release", ";project root ;+publish ;sonatypeReleaseAll")
 
 lazy val credentialSettings = Seq(
   credentials ++= (for {
@@ -23,7 +19,7 @@ lazy val publisherSettings = Seq(
   )
 )
 
-lazy val releaseSettings = gpgSettings ++ publisherSettings ++ credentialSettings
+lazy val releaseSettings = publisherSettings ++ credentialSettings
 
 lazy val commonSettings = releaseSettings ++ Seq(
   version := "2.0.0-RC1",
