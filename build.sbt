@@ -73,8 +73,7 @@ lazy val cFlags = Seq(
         "-Ywarn-inaccessible",
         "-Ywarn-infer-any",
         "-Ywarn-nullary-override",
-        "-Ywarn-nullary-unit",
-        "-Ypartial-unification"
+        "-Ywarn-nullary-unit"
       )
     case _ =>
       ScalacOptions.All
