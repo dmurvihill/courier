@@ -22,12 +22,12 @@ lazy val publisherSettings = Seq(
 lazy val releaseSettings = publisherSettings ++ credentialSettings
 
 lazy val commonSettings = releaseSettings ++ Seq(
-  version := "2.0.0",
+  version := "3.0.0",
   organization := "com.github.daddykotex",
   description := "deliver electronic mail with scala",
   licenses := Seq(("MIT", url("https://opensource.org/licenses/MIT"))),
   homepage := Some(url("https://github.com/dmurvihill/courier")),
-  crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
+  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.3"),
   scalaVersion := crossScalaVersions.value.last,
   scmInfo := Some(
     ScmInfo(
@@ -80,7 +80,7 @@ lazy val cFlags = Seq(
   })
 )
 
-lazy val scalaTestVersion = "3.0.8"
+lazy val scalaTestVersion = "3.2.2"
 
 lazy val root = (project in file("."))
   .settings(commonSettings ++ cFlags)
