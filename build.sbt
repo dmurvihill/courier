@@ -22,12 +22,12 @@ lazy val publisherSettings = Seq(
 lazy val releaseSettings = publisherSettings ++ credentialSettings
 
 lazy val commonSettings = releaseSettings ++ Seq(
-  version := "3.0.0",
+  version := "3.0.0-RC1",
   organization := "com.github.daddykotex",
   description := "deliver electronic mail with scala",
   licenses := Seq(("MIT", url("https://opensource.org/licenses/MIT"))),
   homepage := Some(url("https://github.com/dmurvihill/courier")),
-  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.3"),
+  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.3", "0.27.0-RC1"),
   scalaVersion := crossScalaVersions.value.last,
   scmInfo := Some(
     ScmInfo(
@@ -53,14 +53,14 @@ lazy val commonSettings = releaseSettings ++ Seq(
 
 lazy val cFlags = Seq(
   scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, n)) if n == 11 =>
+    case Some((2, 11)) =>
       Seq(
         "-language:existentials",
         "-language:higherKinds",
         "-language:implicitConversions",
         "-Ypartial-unification"
       )
-    case Some((2, n)) if n == 12 =>
+    case Some((2, 12)) =>
       ScalacOptions.All ++ Seq(
         "-language:existentials",
         "-language:higherKinds",
@@ -75,9 +75,16 @@ lazy val cFlags = Seq(
         "-Ywarn-nullary-override",
         "-Ywarn-nullary-unit"
       )
-    case _ =>
+    case Some((2, 13)) =>
       ScalacOptions.All
-  })
+    case Some((0, 27)) =>
+      Seq.empty
+    case Some(_) | None =>
+      throw new IllegalArgumentException("Unable to figure out scalacOptions")
+  }),
+  scalacOptions in Test := {
+    if (isDotty.value) { Seq("-language:implicitConversions") } else { Seq.empty }
+  }
 )
 
 lazy val scalaTestVersion = "3.2.2"
