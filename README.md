@@ -1,6 +1,6 @@
 # courier
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.daddykotex/courier_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.daddykotex/courier_2.12)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.daddykotex/courier_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.daddykotex/courier_2.13)
 
 deliver electronic mail with scala from the [future](http://www.scala-lang.org/api/current/index.html#scala.concurrent.Future)
 
@@ -11,8 +11,10 @@ deliver electronic mail with scala from the [future](http://www.scala-lang.org/a
 Via the copy and paste method
 
 ```scala
-libraryDependencies += "com.github.daddykotex" %% "courier" % "2.0.0"
+libraryDependencies += "com.github.daddykotex" %% "courier" % "3.0.0-RC1"
 ```
+
+Note: Scala3 (or Dotty) is supported via `3.0.0-RC1` at version `0.27.0-RC1`. `3.0.0-M1` will be supported in an upcoming release, most likely RC2.
 
 ## usage
 
