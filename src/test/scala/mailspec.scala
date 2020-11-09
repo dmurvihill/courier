@@ -5,6 +5,8 @@ import java.util.Properties
 import javax.mail.Provider
 import org.jvnet.mock_javamail.{Mailbox, MockTransport}
 import org.scalatest._
+import wordspec._
+import matchers._
 
 import scala.concurrent.Await
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -12,7 +14,7 @@ import scala.concurrent.duration._
 
 class MockedSMTPProvider extends Provider(Provider.Type.TRANSPORT, "mocked", classOf[MockTransport].getName, "Mock", null)
 
-class MailSpec extends WordSpec {
+class MailSpec extends AnyWordSpec with should.Matchers {
   private val mockedSession = javax.mail.Session.getDefaultInstance(new Properties() {{
     put("mail.transport.protocol.rfc822", "mocked")
   }})
