@@ -22,12 +22,12 @@ lazy val publisherSettings = Seq(
 lazy val releaseSettings = publisherSettings ++ credentialSettings
 
 lazy val commonSettings = releaseSettings ++ Seq(
-  version := "3.0.0-RC1",
+  version := "3.0.0-M1",
   organization := "com.github.daddykotex",
   description := "deliver electronic mail with scala",
   licenses := Seq(("MIT", url("https://opensource.org/licenses/MIT"))),
   homepage := Some(url("https://github.com/dmurvihill/courier")),
-  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.3", "0.27.0-RC1"),
+  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.3", "3.0.0-M1"),
   scalaVersion := crossScalaVersions.value.last,
   scmInfo := Some(
     ScmInfo(
@@ -77,17 +77,12 @@ lazy val cFlags = Seq(
       )
     case Some((2, 13)) =>
       ScalacOptions.All
-    case Some((0, 27)) =>
-      Seq.empty
+    case Some((3, 0)) =>
+      Seq("-rewrite")
     case Some(_) | None =>
       throw new IllegalArgumentException("Unable to figure out scalacOptions")
-  }),
-  scalacOptions in Test := {
-    if (isDotty.value) { Seq("-language:implicitConversions") } else { Seq.empty }
-  }
+  })
 )
-
-lazy val scalaTestVersion = "3.2.2"
 
 lazy val root = (project in file("."))
   .settings(commonSettings ++ cFlags)
@@ -98,8 +93,8 @@ lazy val root = (project in file("."))
       "javax.activation"  % "activation"      % "1.1.1",
       "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.61" % Optional,
       "org.bouncycastle"  % "bcmail-jdk15on"  % "1.61" % Optional,
-      "org.scalactic"     %% "scalactic"      % scalaTestVersion % Test,
-      "org.scalatest"     %% "scalatest"      % scalaTestVersion % Test,
+      "org.scalameta"     %% "munit"          % "0.7.17" % Test,
       "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % Test
-    )
+    ),
+    testFrameworks += new TestFramework("munit.Framework")
   )
