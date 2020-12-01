@@ -22,12 +22,12 @@ lazy val publisherSettings = Seq(
 lazy val releaseSettings = publisherSettings ++ credentialSettings
 
 lazy val commonSettings = releaseSettings ++ Seq(
-  version := "3.0.0-M1",
+  version := "3.0.0-M2",
   organization := "com.github.daddykotex",
   description := "deliver electronic mail with scala",
   licenses := Seq(("MIT", url("https://opensource.org/licenses/MIT"))),
   homepage := Some(url("https://github.com/dmurvihill/courier")),
-  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.3", "3.0.0-M1"),
+  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.3", "3.0.0-M2"),
   scalaVersion := crossScalaVersions.value.last,
   scmInfo := Some(
     ScmInfo(
@@ -93,7 +93,7 @@ lazy val root = (project in file("."))
       "javax.activation"  % "activation"      % "1.1.1",
       "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.61" % Optional,
       "org.bouncycastle"  % "bcmail-jdk15on"  % "1.61" % Optional,
-      "org.scalameta"     %% "munit"          % "0.7.17" % Test,
+      "org.scalameta"     %% "munit"          % "0.7.19" % Test,
       "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % Test
     ),
     testFrameworks += new TestFramework("munit.Framework")
