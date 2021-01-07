@@ -30,9 +30,9 @@ case class Multipart(_parts: Seq[MimeBodyPart] = Seq.empty[MimeBodyPart], subtyp
       name.foreach(setFileName)
     })
 
-  def text(str: String) =
+  def text(str: String, charset: Charset = Charset.defaultCharset) =
     add(new MimeBodyPart {
-      setContent(str, "text/plain")
+      setText(str, charset.displayName())
     })
 
   def html(str: String, charset: Charset = Charset.defaultCharset) =
