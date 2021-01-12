@@ -22,7 +22,7 @@ lazy val publisherSettings = Seq(
 lazy val releaseSettings = publisherSettings ++ credentialSettings
 
 lazy val commonSettings = releaseSettings ++ Seq(
-  version := "3.0.0-M3a",
+  version := "3.0.0-M2a",
   organization := "com.github.daddykotex",
   description := "deliver electronic mail with scala",
   licenses := Seq(("MIT", url("https://opensource.org/licenses/MIT"))),
