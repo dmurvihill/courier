@@ -11,7 +11,7 @@ deliver electronic mail with scala from the [future](http://www.scala-lang.org/a
 Via the copy and paste method
 
 ```scala
-libraryDependencies += "com.github.daddykotex" %% "courier" % "3.0.0-M2"
+libraryDependencies += "com.github.daddykotex" %% "courier" % "3.0.0-M2a"
 ```
 
 Note: Scala3 (or Dotty) is supported.
