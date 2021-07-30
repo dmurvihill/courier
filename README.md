@@ -26,6 +26,7 @@ deliver electronic mail via gmail
 
 ```scala
 import courier._, Defaults._
+import scala.util._
 val mailer = Mailer("smtp.gmail.com", 587)
                .auth(true)
                .as("you@gmail.com", "p@$$w3rd")
@@ -34,8 +35,9 @@ mailer(Envelope.from("you" `@` "gmail.com")
         .to("mom" `@` "gmail.com")
         .cc("dad" `@` "gmail.com")
         .subject("miss you")
-        .content(Text("hi mom"))).onSuccess {
-          case _ => println("message delivered")
+        .content(Text("hi mom"))).onComplete {
+          case Success(_) => println("message delivered")
+          case Failure(_) => println("delivery failed")
         }
 
 mailer(Envelope.from("you" `@` "work.com")
@@ -44,8 +46,9 @@ mailer(Envelope.from("you" `@` "work.com")
          .content(Multipart()
            .attach(new java.io.File("tps.xls"))
            .html("<html><body><h1>IT'S IMPORTANT</h1></body></html>")))
-           .onSuccess {
-             case _ => println("delivered report")
+           .onComplete {
+             case Success(_) => println("delivered report")
+             case Failure(_) => println("delivery failed")
            }
 ```
 
