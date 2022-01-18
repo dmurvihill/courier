@@ -14,11 +14,15 @@ Via the copy and paste method
 libraryDependencies += "com.github.daddykotex" %% "courier" % "3.0.1"
 ```
 
+3.1.0 supports scala 2.11 to 3.1
+
 Note: Scala3 (or Dotty) is supported.
+
 - `3.0.0-RC1` for dotty: `0.27.0-RC1`
-- `3.0.0-M1`  for dotty: `3.0.0-M1`
-- `3.0.0-M2`  for dotty: `3.0.0-M2`
-- `3.0.1` scala3: `3.0.1`
+- `3.0.0-M1` for dotty: `3.0.0-M1`
+- `3.0.0-M2` for dotty: `3.0.0-M2`
+- `3.0.1` scala 3: `3.0.1`
+- `3.1.9` scala 3: `3.1.0`
 
 ## usage
 
@@ -55,6 +59,7 @@ mailer(Envelope.from("you" `@` "work.com")
 If using SSL/TLS instead of STARTTLS, substitute `.startTls(true)` with `.ssl(true)` when setting up the `Mailer`.
 
 ### S/MIME
+
 Courier supports sending S/MIME signed email through its optional dependencies on the Bouncycastle cryptography libraries. It does not yet support sending encrypted email.
 
 Make sure the Mailer is instantiated with a signer, and then wrap your message in a Signed() object.
@@ -82,7 +87,6 @@ val envelope = Envelope
 
 mailer(envelope)
 ```
-
 
 ## testing
 
