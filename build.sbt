@@ -84,7 +84,7 @@ lazy val cFlags = Seq(
   })
 )
 
-lazy val root = (project in file("."))
+lazy val courier = (project in file("courier"))
   .settings(commonSettings ++ cFlags)
   .settings(
     name := "courier",
