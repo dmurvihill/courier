@@ -27,7 +27,7 @@ lazy val commonSettings = releaseSettings ++ Seq(
   description := "deliver electronic mail with scala",
   licenses := Seq(("MIT", url("https://opensource.org/licenses/MIT"))),
   homepage := Some(url("https://github.com/dmurvihill/courier")),
-  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.4", "3.0.1", "3.1.0"),
+  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.4"),
   scalaVersion := crossScalaVersions.value.last,
   scmInfo := Some(
     ScmInfo(
@@ -100,3 +100,13 @@ lazy val courier = (project in file("courier"))
     ),
     testFrameworks += new TestFramework("munit.Framework")
   )
+
+  lazy val courierRetry = (project in file("courier-retry"))
+  .settings(commonSettings ++ cFlags)
+  .settings(
+    name := "courier-retry",
+    libraryDependencies ++= Seq(
+      "com.softwaremill.retry" %% "retry" % "0.3.3"
+    )
+  )
+  .dependsOn(courier)
