@@ -10,7 +10,7 @@ deliver electronic mail with scala from the [future](http://www.scala-lang.org/a
 
 Via the copy and paste method
 
-```scala
+```sbt
 libraryDependencies += "com.github.daddykotex" %% "courier" % "3.0.1"
 ```
 
@@ -57,6 +57,63 @@ mailer(Envelope.from("you" `@` "work.com")
 ```
 
 If using SSL/TLS instead of STARTTLS, substitute `.startTls(true)` with `.ssl(true)` when setting up the `Mailer`.
+
+### Retry
+
+If you need to retry email sending, you can include `courier-retry`. First, add the dependencies:
+
+```sbt
+libraryDependencies += "com.github.daddykotex" %% "courier-retry" % "3.0.1"
+```
+
+Then, you need two things:
+
+  * an implicit `RetryConfig` in scope
+  * `import courier.Retry._`
+
+When you have this, you can replace your calls to `Mailer.apply` by `Mailer.sendWithRetry`. The following is a rewrite of the example above, that retry mail sending in case of failure using the default policy.
+
+```scala
+import courier._, Defaults._, Retry._
+import scala.util._
+
+implicit val retryConfig: RetryConfig = RetryConfig.Default
+val mailer = Mailer("smtp.gmail.com", 587)
+               .auth(true)
+               .as("you@gmail.com", "p@$$w3rd")
+               .startTls(true)()
+
+mailer.sendWithRetry(Envelope.from("you" `@` "gmail.com")
+        .to("mom" `@` "gmail.com")
+        .cc("dad" `@` "gmail.com")
+        .subject("miss you")
+        .content(Text("hi mom"))).onComplete {
+          case Success(_) => println("message delivered")
+          case Failure(_) => println("delivery failed")
+        }
+```
+
+#### Default retry policy
+
+To implement the retrying behaviour, we use https://github.com/softwaremill/retry. The default retry policy in `courier` retries when a specific set of exception occurs, currently:
+
+* com.sun.mail.util.MailConnectException
+
+Defining your own retry policy can be done in various ways:
+
+```scala
+implicit val a: RetryConfig = RetryConfig.retryForExceptions(RetryConfig.DefaultPolicy, List(classOf[SendFailedException])) // retrying only when a SendFailedException is thrown
+
+implicit val a: RetryConfig = {
+  val pause = retry.Pause(3, 10.seconds)
+  val when = retry.When {
+    case NonFatal(ex: SendFailedException) if ex.getInvalidAddresses().nonEmpty => pause
+  }
+  RetryConfig(when, retry.Success.always) // pause for 10 second between retry, maximum 3 times, and only if the partial function above applies
+}
+```
+
+See `retry` documentation for more information.
 
 ### S/MIME
 
