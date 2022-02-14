@@ -22,7 +22,7 @@ Note: Scala3 (or Dotty) is supported.
 - `3.0.0-M1` for dotty: `3.0.0-M1`
 - `3.0.0-M2` for dotty: `3.0.0-M2`
 - `3.0.1` scala 3: `3.0.1`
-- `3.1.9` scala 3: `3.1.0`
+- `3.1.0` scala 3: `3.1.0`
 
 ## usage
 
