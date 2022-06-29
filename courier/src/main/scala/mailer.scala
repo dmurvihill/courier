@@ -10,29 +10,32 @@ object Mailer {
     Mailer().session.host(host).port(port)
 }
 
-case class Mailer(_session: MailSession = Defaults.session, signer: Option[Signer] = None) {
+case class Mailer(_session: MailSession = Defaults.session,
+                  signer: Option[Signer] = None,
+                  mimeMessageFactory: MailSession => MimeMessage = Defaults.mimeMessageFactory) {
   def session = Session.Builder(this)
 
   def apply(e: Envelope)(implicit ec: ExecutionContext): Future[Unit] = {
-    val msg = new MimeMessage(_session) {
-      e.subject.foreach {
-        case (subject, Some(charset)) => setSubject(subject, charset.name())
-        case (subject, None) => setSubject(subject)
-      }
-      setFrom(e.from)
-      e.to.foreach(addRecipient(Message.RecipientType.TO, _))
-      e.cc.foreach(addRecipient(Message.RecipientType.CC, _))
-      e.bcc.foreach(addRecipient(Message.RecipientType.BCC, _))
-      e.replyTo.foreach(a => setReplyTo(Array(a)))
-      e.headers.foreach(h => addHeader(h._1, h._2))
-      e.contents match {
-        case Text(txt, charset) => setText(txt, charset.displayName)
-        case mp: Multipart => setContent(mp.parts)
-        case Signed(body) =>
-          if(signer.isDefined) setContent(signer.get.sign(body))
-          else throw new IllegalArgumentException("No signer defined, cannot sign!")
-      }
+    val msg = mimeMessageFactory(_session)
+
+    e.subject.foreach {
+      case (subject, Some(charset)) => msg.setSubject(subject, charset.name())
+      case (subject, None) => msg.setSubject(subject)
     }
+    msg.setFrom(e.from)
+    e.to.foreach(msg.addRecipient(Message.RecipientType.TO, _))
+    e.cc.foreach(msg.addRecipient(Message.RecipientType.CC, _))
+    e.bcc.foreach(msg.addRecipient(Message.RecipientType.BCC, _))
+    e.replyTo.foreach(a => msg.setReplyTo(Array(a)))
+    e.headers.foreach(h => msg.addHeader(h._1, h._2))
+    e.contents match {
+      case Text(txt, charset) => msg.setText(txt, charset.displayName)
+      case mp: Multipart => msg.setContent(mp.parts)
+      case Signed(body) =>
+        if (signer.isDefined) msg.setContent(signer.get.sign(body))
+        else throw new IllegalArgumentException("No signer defined, cannot sign!")
+    }
+
     Future {
       Transport.send(msg)
     }
