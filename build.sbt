@@ -21,6 +21,12 @@ lazy val publisherSettings = Seq(
 
 lazy val releaseSettings = publisherSettings ++ credentialSettings
 
+def java8Options(scalaVersion: String): Seq[String] =
+    if (scalaVersion.startsWith("2.12") || scalaVersion.startsWith("2.11")) Seq("-target:jvm-1.8", "-release", "8")
+    else if (scalaVersion.startsWith("2.13")) Seq("-target:8", "-release", "8")
+    else if (scalaVersion.startsWith("3.")) Seq("-release", "8")
+    else sys.error(s"Unsupported scala version: $scalaVersion")
+
 lazy val commonSettings = releaseSettings ++ Seq(
   version := "3.2.0",
   organization := "com.github.daddykotex",
