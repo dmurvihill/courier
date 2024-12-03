@@ -106,3 +106,12 @@ lazy val courier = (project in file("courier"))
     ),
     testFrameworks += new TestFramework("munit.Framework")
   )
+lazy val it = (project in file("integration-tests"))
+  .settings(commonSettings ++ cFlags)
+  .settings(
+    name := "courier-integration-tests",
+    libraryDependencies ++= Seq(
+      "org.scalameta"     %% "munit"          % "0.7.27" % Test,
+    ),
+    testFrameworks += new TestFramework("munit.Framework")
+  ).dependsOn(courier)
