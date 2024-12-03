@@ -15,7 +15,7 @@ case class Mailer(_session: MailSession = Defaults.session,
                   mimeMessageFactory: MailSession => MimeMessage = Defaults.mimeMessageFactory) {
   def session = Session.Builder(this)
 
-  def apply(e: Envelope)(implicit ec: ExecutionContext): Future[Unit] = {
+  def apply(e: Envelope)(implicit ec: ExecutionContext): Future[Option[String]] = {
     val msg = mimeMessageFactory(_session)
 
     e.subject.foreach {
@@ -37,7 +37,9 @@ case class Mailer(_session: MailSession = Defaults.session,
     }
 
     Future {
-      Transport.send(msg)
+      // sending the email sets the message id
+      val _ = Transport.send(msg)
+      Option(msg.getMessageID())
     }
   }
 }
