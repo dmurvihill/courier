@@ -48,3 +48,5 @@ worker*.log
 project/.gnupg/
 .bloop/
 .metals/
+.bsp/
+.env
