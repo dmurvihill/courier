@@ -101,7 +101,7 @@ lazy val courier = (project in file("courier"))
       "javax.activation"  % "activation"      % "1.1.1",
       "org.bouncycastle"  % "bcpkix-jdk15on"  % "1.61" % Optional,
       "org.bouncycastle"  % "bcmail-jdk15on"  % "1.61" % Optional,
-      "org.scalameta"     %% "munit"          % "0.7.27" % Test,
+      "org.scalameta"     %% "munit"          % "0.7.29" % Test,
       "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % Test
     ),
     testFrameworks += new TestFramework("munit.Framework")
@@ -111,7 +111,7 @@ lazy val it = (project in file("integration-tests"))
   .settings(
     name := "courier-integration-tests",
     libraryDependencies ++= Seq(
-      "org.scalameta"     %% "munit"          % "0.7.27" % Test,
+      "org.scalameta"     %% "munit"          % "0.7.29" % Test,
     ),
     testFrameworks += new TestFramework("munit.Framework")
   ).dependsOn(courier)
