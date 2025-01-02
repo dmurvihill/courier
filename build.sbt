@@ -110,6 +110,8 @@ lazy val it = (project in file("integration-tests"))
   .settings(commonSettings ++ cFlags)
   .settings(
     name := "courier-integration-tests",
+    publish := {},
+    publish / skip := true,
     libraryDependencies ++= Seq(
       "org.scalameta"     %% "munit"          % "0.7.29" % Test,
     ),
