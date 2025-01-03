@@ -98,4 +98,10 @@ libraryDependencies += "org.jvnet.mock-javamail" % "mock-javamail" % "1.9" % "te
 
 With this library, you should, given a little bit of boilerplate, be able to set a test against a mocked Mailbox. This repo contains [an example](src/test/scala/mailspec.scala).
 
+## changelog
+
+**4.0.0-RC1**
+
+- includes a breaking change in the Mailer#apply function. It now returns a `Future[String]` as opposed to a `Future[Unit]`.
+
 (C) Doug Tangren (softprops) and others, 2013-2018
