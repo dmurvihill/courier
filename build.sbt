@@ -1,5 +1,5 @@
 addCommandAlias("ci", ";clean ;+test")
-addCommandAlias("release", ";project root ;+publish ;sonatypeReleaseAll")
+addCommandAlias("release", ";project root ;+publishSigned ;sonatypeReleaseAll")
 
 lazy val credentialSettings = Seq(
   credentials ++= (for {
@@ -33,7 +33,7 @@ lazy val commonSettings = releaseSettings ++ Seq(
   description := "deliver electronic mail with scala",
   licenses := Seq(("MIT", url("https://opensource.org/licenses/MIT"))),
   homepage := Some(url("https://github.com/dmurvihill/courier")),
-  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.4", "3.0.1", "3.1.0"),
+  crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.4", "3.1.0"),
   scalaVersion := crossScalaVersions.value.last,
   scmInfo := Some(
     ScmInfo(
@@ -91,6 +91,15 @@ lazy val cFlags = Seq(
       throw new IllegalArgumentException("Unable to figure out scalacOptions")
   })
 )
+
+lazy val root = (project in file("."))
+  .settings(commonSettings ++ cFlags)
+  .settings(
+    name := "courier-root",
+    publish := {},
+    publish / skip := true,
+  )
+  .aggregate(courier, it)
 
 lazy val courier = (project in file("courier"))
   .settings(commonSettings ++ cFlags)
