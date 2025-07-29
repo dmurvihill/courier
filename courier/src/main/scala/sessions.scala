@@ -31,7 +31,7 @@ object Session {
     def apply() =
       mailer.copy(_session = MailSession.getInstance(
         new Properties(System.getProperties) {
-        _debug.map(d => put("mail.smtp.debug", d.toString))
+        _debug.map(d => put("mail.debug", d.toString))
         _auth.map(a => put("mail.smtp.auth", a.toString))
         // enable ESMTP
         _startTls.map(s => put("mail.smtp.starttls.enable", s.toString))

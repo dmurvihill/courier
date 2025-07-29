@@ -12,6 +12,7 @@ class MailSpec extends munit.FunSuite {
     val email = sys.env("IT_EMAIL")
     val password = sys.env("IT_PASSWORD")
     val mailer = Mailer("smtp.gmail.com", 587)
+                .debug(true)
                 .auth(true)
                 .as(email, password)
                 .startTls(true)()
